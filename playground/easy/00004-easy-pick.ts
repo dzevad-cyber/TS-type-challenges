@@ -31,7 +31,12 @@
 
 /* _____________ Your Code Here _____________ */
 
-type MyPick<T, K> = any;
+type MyPick<T extends {}, K extends keyof T> = {
+  [P in K]: T[P];
+};
+
+type _ = MyPick<Todo, 'title'>;
+//   ^?
 
 /* _____________ Test Cases _____________ */
 import type { Equal, Expect } from '../../utils';
